@@ -5,9 +5,13 @@ RUN apk add \
       --no-cache \
         bash \
         git \
-        git-lfs
+        git-lfs\
+        dos2unix
 
 COPY --chmod=755 ./assets-download.sh /assets-download.sh
+
+#convert malformed line endings if cloned from Windows
+RUN dos2unix /assets-download.sh
 
 RUN /assets-download.sh 88e42f0cb3662ddc0dd263a4814206ce96d53214 assets
 
