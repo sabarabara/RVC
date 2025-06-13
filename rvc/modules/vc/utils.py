@@ -1,3 +1,15 @@
+import torch
+
+try:
+    from torch.serialization import add_safe_globals
+except ImportError:
+    add_safe_globals = None
+
+import fairseq.data.dictionary
+
+if add_safe_globals is not None:
+    add_safe_globals([fairseq.data.dictionary.Dictionary])
+
 import os
 
 from fairseq import checkpoint_utils
@@ -28,3 +40,4 @@ def load_hubert(config, hubert_path: str):
     hubert_model = hubert_model.to(config.device)
     hubert_model = hubert_model.half() if config.is_half else hubert_model.float()
     return hubert_model.eval()
+

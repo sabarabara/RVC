@@ -7,6 +7,7 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 import torch
+from rvc.modules.vc.utils import load_hubert
 
 from rvc.configs.config import Config
 from rvc.lib.audio import load_audio, wav2
